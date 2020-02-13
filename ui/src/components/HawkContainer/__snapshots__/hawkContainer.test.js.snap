@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the HawkContainer snapshot 1`] = `
+<div
+  className="hawk-container"
+>
+  <button
+    className="hawk-container__add-button"
+    onClick={[Function]}
+  >
+    + Add Hawk
+  </button>
+  <div
+    className="hawk-container__filter"
+  >
+    <input
+      className="filter-input"
+      onChange={[Function]}
+      placeholder="filter by hawk name"
+      value=""
+    />
+    <button
+      className="filter-submit"
+      onClick={[Function]}
+    >
+      Filter
+    </button>
+  </div>
+  <div
+    className="hawk-container__table-and-editor"
+  >
+    <div
+      className="hawk-table"
+    >
+      <div
+        className="hawk-table__header"
+      >
+        <span
+          className="header-cell header-cell--name"
+        >
+          <div
+            className="header-cell__name"
+          >
+            name
+          </div>
+          <div
+            className="header-cell__arrows"
+          >
+            <div
+              className="arrow up-arrow"
+              onClick={[Function]}
+            >
+              ▲
+            </div>
+            <div
+              className="arrow down-arrow"
+              onClick={[Function]}
+            >
+              ▼
+            </div>
+          </div>
+        </span>
+        <span
+          className="header-cell header-cell--size"
+        >
+          <div
+            className="header-cell__name"
+          >
+            size
+          </div>
+          <div
+            className="header-cell__arrows"
+          >
+            <div
+              className="arrow up-arrow"
+              onClick={[Function]}
+            >
+              ▲
+            </div>
+            <div
+              className="arrow down-arrow"
+              onClick={[Function]}
+            >
+              ▼
+            </div>
+          </div>
+        </span>
+        <span
+          className="header-cell header-cell--gender"
+        >
+          <div
+            className="header-cell__name"
+          >
+            gender
+          </div>
+          <div
+            className="header-cell__arrows"
+          >
+            <div
+              className="arrow up-arrow"
+              onClick={[Function]}
+            >
+              ▲
+            </div>
+            <div
+              className="arrow down-arrow"
+              onClick={[Function]}
+            >
+              ▼
+            </div>
+          </div>
+        </span>
+      </div>
+      <div
+        className="hawk-table__rows"
+        onScroll={[Function]}
+      />
+    </div>
+  </div>
+</div>
+`;

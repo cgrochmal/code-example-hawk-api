@@ -21,7 +21,7 @@ export default function HawkTableHeaderCell(props) {
         {cellType}
       </div>
       <div className='header-cell__arrows'>
-        <div className='arrow up-arrow' onClick={() => handleSortChange(cellType, 'asc')}>&#x25B2;</div>
+        <div className='arrow up-arrow' onClick={() => {handleSortChange(cellType, 'asc') }}>&#x25B2;</div>
         <div className='arrow down-arrow' onClick={() => handleSortChange(cellType, 'desc')}>&#x25BC;</div>
       </div>
     </span>

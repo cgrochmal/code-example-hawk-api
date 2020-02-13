@@ -73,7 +73,9 @@ export default class HawkContainer extends React.Component {
     }
   }
   handleSortChange(sortField, direction) {
-    this.fetchCurrentHawks(sortField, direction)
+    this.sortField = sortField
+    this.sortDir = direction
+    this.fetchCurrentHawks()
   }
   handleViewHawk(hawk) {
     const {selectedHawk} = this.state
@@ -137,7 +139,7 @@ export default class HawkContainer extends React.Component {
           </button>
         <div className='hawk-container__filter'>
           <input className='filter-input' onChange={this.handleFilterChange} value={filterText || ''} placeholder={'filter by hawk name'}/>
-          <button className='filter-submit' onClick={this.fetchCurrentHawks} disabled={!filterText}>Filter</button>
+          <button className='filter-submit' onClick={this.fetchCurrentHawks}>Filter</button>
         </div>
         <div className={'hawk-container__table-and-editor'}>
           {

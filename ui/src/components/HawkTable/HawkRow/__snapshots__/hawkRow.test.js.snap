@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the HawkRow snapshot 1`] = `
+<div
+  className="hawk-row"
+>
+  <span
+    className="hawk-row__cell hawk-row__cell--name"
+  >
+    test0
+  </span>
+  <span
+    className="hawk-row__cell hawk-row__cell--size"
+  >
+    SMALL
+  </span>
+  <span
+    className="hawk-row__cell hawk-row__cell--gender"
+  >
+    FEMALE
+  </span>
+  <span
+    className="hawk-row__cell hawk-row__cell--view"
+  >
+    <button
+      className="view-hawk-button"
+      onClick={[Function]}
+    >
+      View
+    </button>
+  </span>
+</div>
+`;

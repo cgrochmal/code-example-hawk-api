@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the HawkTableHeaderCell snapshot 1`] = `
+<span
+  className="header-cell header-cell--name"
+>
+  <div
+    className="header-cell__name"
+  >
+    name
+  </div>
+  <div
+    className="header-cell__arrows"
+  >
+    <div
+      className="arrow up-arrow"
+      onClick={[Function]}
+    >
+      ▲
+    </div>
+    <div
+      className="arrow down-arrow"
+      onClick={[Function]}
+    >
+      ▼
+    </div>
+  </div>
+</span>
+`;
