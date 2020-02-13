@@ -5,20 +5,50 @@ import _ from 'lodash'
 import apiService from '../../services/apiService'
 import './editHawkContainer.scss'
 
+/**
+ * Container used for viewing hawk details, as well as adding and editing hawks
+ */
 export default class editHawkContainer extends React.Component {
 
   constructor(props) {
     super(props)
     editHawkContainer.propTypes = {
-      hawk: PropTypes.object.isRequired,
-      handleUpdateHawk: PropTypes.func
+      hawk: PropTypes.object,
+      handleUpdateHawk: PropTypes.func,
+      handleCreateHawk: PropTypes.func,
+      isNewHawk: PropTypes.bool, //whether this is used for an add as opposed to an update
     }
     this.state = {
       // deep copy to avoid mutating props.hawk
-      hawk: _.cloneDeep(props.hawk),
+      hawk: props.isNewHawk ? this.getDefaultHawk() : _.cloneDeep(props.hawk),
       dataChanged: false
     }
-    this.updateHawk = this.updateHawk.bind(this)
+    this.submitHawk = this.submitHawk.bind(this)
+    this.isHawkValid = this.isHawkValid.bind(this)
+  }
+
+  getDefaultHawk() {
+    return {
+      behaviorDescription: '',
+      colorDescription: '',
+      gender: 'MALE',
+      habitatDescription: '',
+      lengthBegin: 0,
+      lengthEnd: 0,
+      name: '',
+      pictureUrl: '',
+      size: 'SMALL',
+      weightBegin: 0,
+      weightEnd: 0,
+      wingspanBegin: 0,
+      wingspanEnd: 0
+    }
+  }
+
+  isHawkValid() {
+    // TODO: better validation
+    const {hawk} = this.state
+    return !!hawk.name
   }
 
   /**
@@ -42,22 +72,28 @@ export default class editHawkContainer extends React.Component {
     }
   }
 
-  /**
-   * Form submission handler
-   */
-  async updateHawk(e) {
+  submitHawk(e) {
     e.preventDefault()
-    // TODO: input validation
-    const {hawk, dataChanged} = this.state
+    if (this.props.isNewHawk) this.createHawk()
+    else this.updateHawk()
+  }
+
+  async createHawk() {
+    const {hawk} = this.state
+    const {handleCreateHawk} = this.props
+    const newHawk = await apiService.createHawk(hawk)
+    handleCreateHawk(newHawk)
+  }
+
+  async updateHawk() {
+    const {hawk} = this.state
     const {handleUpdateHawk} = this.props
-    if (dataChanged) {
-      // immediatly update UI without waiting on UI
-      handleUpdateHawk(hawk)
-      const updatedHawk = await apiService.updateHawk(hawk)
-      // update with actual record from API
-      handleUpdateHawk(updatedHawk)
-      // TODO: rollback logic in case of API failure
-    }
+    // immediatly update UI without waiting on UI
+    handleUpdateHawk(hawk)
+    const updatedHawk = await apiService.updateHawk(hawk)
+    // update with actual record from API
+    handleUpdateHawk(updatedHawk)
+    // TODO: rollback logic in case of API failure
   }
 
   /**
@@ -71,7 +107,7 @@ export default class editHawkContainer extends React.Component {
     // TODO: componentize fields (radio button fields, text fields, and numeric range fields should each be a component)
     return (
       <div className='edit-hawk'>
-        <form onSubmit={this.updateHawk}>
+        <form onSubmit={this.submitHawk}>
           {/* NAME */}
           <span className='edit-hawk__name'>
             <label className='edit-hawk__label' htmlFor='hawk-name'>Name</label>
@@ -165,7 +201,7 @@ export default class editHawkContainer extends React.Component {
             <textarea id='hawk-habitat' onChange={e => this.handleFieldChange(e, 'habitatDescription')} value={hawk.habitatDescription}/>
           </span>
 
-          <input type='submit' disabled={!dataChanged}/>
+          <input type='submit' disabled={!dataChanged || !this.isHawkValid()} value={'Save'}/>
         </form>
       </div>
     )

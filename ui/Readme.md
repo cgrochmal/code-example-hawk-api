@@ -15,3 +15,4 @@ Possible Future Enhancements
 Design Notes
   - You will notice that I used vanilla-javascript instead of typescript. This is just for speed - I have been on typescript projects before and it wouldn't take me long to get used to it again, but I have been writing vanilla-js react for the last couple of years.
   - I felt that using redux was a bit overkill for this simple CRUD app, but would obviously use it as the app scaled up for centralized state management and data caching
+  - using SCSS and BEM for styles

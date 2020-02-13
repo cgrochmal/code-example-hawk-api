@@ -1,6 +1,5 @@
 .hawk-container {
   width: 100%;
-  display: flex;
   .hawk-table {
     width: 100%;
   }
@@ -11,5 +10,9 @@
     .edit-hawk {
       width: 40%;
     }
+  }
+  &__table-and-editor {
+    display: flex;
+    width: 100%;
   }
 }

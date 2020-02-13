@@ -20,6 +20,7 @@ async function getHawks(page, pageSize=10, sortDir, sortField, filter) {
     + (page ? '&pageToken='+page : '')
     + (sortDir ? '&sortDir='+sortDir : '')
     + (sortField ? '&sortField='+sortField : '')
+    + (filter ? '&filter='+filter : '')
   
   const response = await fetch(url)
   const responseJson = await response.json()
@@ -43,7 +44,24 @@ async function updateHawk(hawk) {
   return responseJson
 }
 
+/**
+ * Create new hawk
+ * @param {object} hawk
+ */
+async function createHawk(hawk) {
+  const response = await fetch(apiBaseUri, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(hawk)
+  })
+  const responseJson = await response.json()
+  return responseJson
+}
+
 export default {
+  createHawk,
   getHawks,
   updateHawk
 }
