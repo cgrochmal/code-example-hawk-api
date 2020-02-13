@@ -1,3 +1,5 @@
+Thanks for viewing my hawk-api implementation! It's not pretty, but I feel good about the code structure as a starting point for a more robust SPA. 
+
 Features Implemented
  - table component/subcomponents
  - fetch list of hawks and populate table
@@ -22,3 +24,4 @@ Future Enhancements
  - loading indicators
  - better animations
  - show which sort field is currently selected with a different style arrow
+ - prettier styles
