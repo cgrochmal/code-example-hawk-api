@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
+import HawkContainer from './components/HawkContainer/hawkContainer';
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <h1>hello world</h1>
+      <HawkContainer/>
     </div>
   );
 }

@@ -1,0 +1,15 @@
+.header-cell {
+  box-sizing: border-box;
+  padding: 8px;
+  border-right: 1px solid;
+  background: #aaa;
+  &__name {
+    display: inline-block;
+  }
+  &__arrows {
+    float: right;
+    .arrow {
+      height: 13px;
+    }
+  }
+}

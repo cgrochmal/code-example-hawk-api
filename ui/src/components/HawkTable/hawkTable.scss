@@ -1,0 +1,38 @@
+.hawk-table {
+  display: flex;
+    flex-direction: column;
+  .hawk-row__cell, .header-cell {
+    position: relative;
+    display: inline-block;
+    height: 48px;
+
+    &--name {
+      width: 40%;
+    }
+    &--size {
+      width: 30%;
+    }
+    &--gender {
+      width: 15%;
+    }
+    &--view {
+      width: 15%;
+    }
+  }
+  &__header {
+    border-bottom: 1px solid;
+  }
+  .hawk-row {
+    border-bottom: 1px solid;
+    &__cell {
+      box-sizing: border-box;
+      padding: 8px;
+    }
+    &:nth-child(odd) {
+      background: #eee;
+    }
+    &:nth-child(even) {
+      background: #ddd;
+    }
+  }
+}
