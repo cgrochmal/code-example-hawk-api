@@ -1,6 +1,8 @@
 .hawk-table {
   display: flex;
     flex-direction: column;
+    border: 2px solid;
+    border-radius: 5px;
   .hawk-row__cell, .header-cell {
     position: relative;
     display: inline-block;

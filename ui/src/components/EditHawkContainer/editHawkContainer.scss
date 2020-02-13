@@ -1,4 +1,49 @@
 .edit-hawk {
   display: flex;
     flex-direction: column;
+  border: 2px solid;
+  border-radius: 5px;
+  border-left: 1px;
+  box-sizing: border-box;
+  padding-top: 16px;
+  &__name, &__size, &__gender, &__length, &__wingspan, &__weight {
+    display: flex;
+      flex-direction: row;
+  }
+  &__color, &__behavior, &__habitat {
+    display: flex;
+      flex-direction: column;
+    margin-top: 24px;
+      .edit-hawk__label {
+        width: 256px;
+      }
+      textarea {
+        border-radius: 5px;
+        width: calc(100% - 32px);
+        margin-left: 16px;
+      }
+  }
+  &__label {
+    margin-left: 16px;
+    width: 128px;
+  }
+  &__sublabel {
+    margin-right: 16px;
+  }
+  input[type="radio"] {
+    margin-right: 8px;
+  }
+  input[type="number"] {
+    margin: 0 8px;
+    width: 48px;
+    border-radius: 5px;
+  }
+  input[type="text"] {
+    border-radius: 5px;
+  }
+  input[type="submit"] {
+    margin: 24px 16px;
+    border-radius: 5px;
+    width: 128px;
+  }
 }

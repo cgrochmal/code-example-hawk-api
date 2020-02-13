@@ -63,7 +63,7 @@ export default class HawkContainer extends React.Component {
    * EVENT HANDLERS
    */
   addHawk() {
-    this.setState({addingHawk: !this.state.addingHawk})
+    this.setState({addingHawk: !this.state.addingHawk, selectedHawk: null})
   }
   handleFilterChange(e) {
     const newFilterValue = e.target.value

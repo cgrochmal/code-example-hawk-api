@@ -196,7 +196,7 @@ export default class editHawkContainer extends React.Component {
             <textarea id='hawk-behavior' onChange={e => this.handleFieldChange(e, 'behaviorDescription')} value={hawk.behaviorDescription}/>
           </span>
           {/* HABITAT DESCRIPTION */}
-          <span className='edit-hawk__behavior'>
+          <span className='edit-hawk__habitat'>
             <label className='edit-hawk__label' htmlFor='hawk-habitat'>Habitat Description</label>
             <textarea id='hawk-habitat' onChange={e => this.handleFieldChange(e, 'habitatDescription')} value={hawk.habitatDescription}/>
           </span>
