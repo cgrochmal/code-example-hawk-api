@@ -28,20 +28,22 @@ async function getHawks(page, pageSize=10, sortDir, sortField, filter) {
 }
 
 /**
- * Send a chat message
- * @param {object} message - must have created_at (date), from_user (int),to_user(int), and body(string)
+ * Update existing hawk
+ * @param {object} hawk
  */
-// async function sendMessage(message) {
-//   const response = await fetch(apiBaseUri + '/message', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(message)
-//   })
-//   return response.json()
-// }
+async function updateHawk(hawk) {
+  const response = await fetch(`${apiBaseUri}/${hawk.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(hawk)
+  })
+  const responseJson = await response.json()
+  return responseJson
+}
 
 export default {
   getHawks,
+  updateHawk
 }

@@ -11,14 +11,20 @@ export default class HawkTable extends React.Component {
     HawkTable.propTypes = {
       hawks: PropTypes.arrayOf(PropTypes.object),
       handleSortChange: PropTypes.func,
-      handleViewHawk: PropTypes.func
+      handleViewHawk: PropTypes.func,
+      selectedHawk: PropTypes.object
     }
   }
   
   render() {
-    const {hawks, handleSortChange} = this.props
+    const {hawks, handleSortChange, handleViewHawk, selectedHawk} = this.props
     const rows = hawks.map( hawk => 
-      <HawkRow hawk={hawk} handleViewHawk={this.props.handleViewHawk}  key={'hawk-'+hawk.id}/>
+      <HawkRow 
+        hawk={hawk} 
+        handleViewHawk={handleViewHawk}  
+        key={'hawk-'+hawk.id}
+        selectedHawk={selectedHawk}
+      />
     )
 
     return (

@@ -9,12 +9,14 @@ import './hawkRow.scss'
 
 HawkRow.propTypes = {
   hawk: PropTypes.object.isRequired,
-  handleViewHawk: PropTypes.func
+  handleViewHawk: PropTypes.func,
+  selectedHawk: PropTypes.object
 }
 
 export default function HawkRow(props) {
-  const {hawk, handleViewHawk} = props
-
+  const {hawk, handleViewHawk, selectedHawk} = props
+  const isSelected = selectedHawk && selectedHawk.id === hawk.id
+  const buttonText = isSelected ? 'Close' : 'View'
   return (
     <div className='hawk-row'>
       <span className='hawk-row__cell hawk-row__cell--name'>
@@ -27,7 +29,7 @@ export default function HawkRow(props) {
         {hawk.gender}
       </span>
       <span className='hawk-row__cell hawk-row__cell--view'>
-        <button className='view-hawk-button' onClick={handleViewHawk}>{'View >>'}</button>
+        <button className='view-hawk-button' onClick={() => handleViewHawk(hawk)}>{buttonText}</button>
       </span>
     </div>
   )
