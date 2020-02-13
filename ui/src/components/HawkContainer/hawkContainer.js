@@ -21,6 +21,11 @@ export default class HawkContainer extends React.Component {
     this.sortField = null
     this.sortDir = null
 
+    //subtract header, filter, and add button height
+    const remainingWindowHeight = window.innerHeight - 48 - 62 - 68
+    // 51 is the height of a row
+    this.pageSize = Math.ceil(remainingWindowHeight / 51)
+
     // I prefer to use explicit binding to auto-bound arrow functions in my react components.
     // I'm happy to elaborate on reasons why in the follow-up interview
     this.addHawk = this.addHawk.bind(this)
@@ -30,6 +35,7 @@ export default class HawkContainer extends React.Component {
     this.handleUpdateHawk = this.handleUpdateHawk.bind(this)
     this.handleFilterChange = this.handleFilterChange.bind(this)
     this.handleAddHawk = this.handleAddHawk.bind(this)
+    this.infiniteScroll = this.infiniteScroll.bind(this)
   }
 
   componentDidMount() {
@@ -41,15 +47,15 @@ export default class HawkContainer extends React.Component {
    */
   async fetchCurrentHawks() {
     const {filterText} = this.state
-    const pageSize = Math.max(this.state.hawks.length, 10)
+    const pageSize = Math.max(this.state.hawks.length, this.pageSize)
     const hawks = await apiService.getHawks(0, pageSize, this.sortDir, this.sortField, filterText)
     this.setState({hawks, loadingHawks: false})
   }
   async fetchNextPageHawks(sortField, sortDir) {
-    const {hawks} = this.state
+    const {hawks, filterText} = this.state
     this.sortField = sortField
     this.sortDir = sortDir
-    const nextPageHawks = await apiService.getHawks(this.currentPage, 10, sortField, sortDir)
+    const nextPageHawks = await apiService.getHawks(++this.currentPage, this.pageSize, this.sortDir, this.sortField, filterText)
     this.setState({hawks: hawks.concat(nextPageHawks)})
   }
 
@@ -57,7 +63,7 @@ export default class HawkContainer extends React.Component {
    * EVENT HANDLERS
    */
   addHawk() {
-    this.setState({addingHawk: true})
+    this.setState({addingHawk: !this.state.addingHawk})
   }
   handleFilterChange(e) {
     const newFilterValue = e.target.value
@@ -72,7 +78,7 @@ export default class HawkContainer extends React.Component {
   handleViewHawk(hawk) {
     const {selectedHawk} = this.state
     if (selectedHawk && selectedHawk.id === hawk.id) this.setState({selectedHawk: null})
-    else this.setState({selectedHawk: hawk})
+    else this.setState({selectedHawk: hawk, addingHawk: false})
   }
   handleAddHawk(newHawk) {
     const {hawks} = this.state
@@ -91,6 +97,13 @@ export default class HawkContainer extends React.Component {
       // update UI and close hawk viewer
       this.setState({hawks, selectedHawk: null})
     }
+  }
+  infiniteScroll() {
+    /**
+     * TODO: optimize this so the api sends # of pages, and we don't have to make a request every time
+     */
+
+    this.fetchNextPageHawks()
   }
 
   /**
@@ -119,9 +132,9 @@ export default class HawkContainer extends React.Component {
 
     return (
       <div className={'hawk-container' + ((selectedHawk || addingHawk) ? ' hawk-container--hawk-selected' : '')}>
-        <div className='hawk-container__add-button'>
-          <button className='add-hawk-button' onClick={this.addHawk} disabled={addingHawk}>&#43; Add Hawk</button>
-        </div>
+        <button className='hawk-container__add-button' onClick={this.addHawk}>
+            {addingHawk ? 'Cancel' : '\u002B Add Hawk'}
+          </button>
         <div className='hawk-container__filter'>
           <input className='filter-input' onChange={this.handleFilterChange} value={filterText || ''} placeholder={'filter by hawk name'}/>
           <button className='filter-submit' onClick={this.fetchCurrentHawks} disabled={!filterText}>Filter</button>
@@ -134,6 +147,7 @@ export default class HawkContainer extends React.Component {
                 hawks={hawks} 
                 handleSortChange={this.handleSortChange} 
                 handleViewHawk={this.handleViewHawk}
+                onScrollEnd={this.infiniteScroll}
                 selectedHawk={selectedHawk}
               />
           }

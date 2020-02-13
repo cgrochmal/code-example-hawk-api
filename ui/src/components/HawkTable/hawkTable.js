@@ -12,7 +12,20 @@ export default class HawkTable extends React.Component {
       hawks: PropTypes.arrayOf(PropTypes.object),
       handleSortChange: PropTypes.func,
       handleViewHawk: PropTypes.func,
-      selectedHawk: PropTypes.object
+      selectedHawk: PropTypes.object,
+      // used for infinite scroll - called when the user scrolls all the way down
+      onScrollEnd: PropTypes.func
+    }
+    this.rowsRef = React.createRef()
+
+    this.handleScroll = this.handleScroll.bind(this)
+  }
+
+  handleScroll() {
+    const {onScrollEnd} = this.props
+    const {scrollTop, scrollHeight, offsetHeight} = this.rowsRef.current
+    if (scrollTop + offsetHeight >= scrollHeight && onScrollEnd) {
+      onScrollEnd()
     }
   }
   
@@ -34,7 +47,7 @@ export default class HawkTable extends React.Component {
           <HawkTableHeaderCell cellType={'size'} handleSortChange={handleSortChange}/>
           <HawkTableHeaderCell cellType={'gender'} handleSortChange={handleSortChange}/>
         </div>
-        <div className='hawk-table__rows'>
+        <div className='hawk-table__rows' onScroll={this.handleScroll} ref={this.rowsRef}>
           {rows}
         </div>
       </div>

@@ -14,13 +14,13 @@ const apiBaseUri = 'http://localhost:8000/api/hawk'
  * @param {*} sortField - 'name', 'size', or 'gender'
  * @param {*} filter - filter hawks by name
  */
-async function getHawks(page, pageSize=10, sortDir, sortField, filter) {
+async function getHawks(page, pageSize=10, sortDir, sortField, filterText) {
   
   const url = `${apiBaseUri}/list?pageSize=${pageSize}`
     + (page ? '&pageToken='+page : '')
     + (sortDir ? '&sortDir='+sortDir : '')
     + (sortField ? '&sortField='+sortField : '')
-    + (filter ? '&filter='+filter : '')
+    + (filterText ? '&filter='+filterText : '')
   
   const response = await fetch(url)
   const responseJson = await response.json()
